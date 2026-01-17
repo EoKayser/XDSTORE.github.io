@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Finalizar Compra | XD Store</title>
+  <link rel="icon" type="image/png" href="xd.png">
+
+  <style>
+   .btn-confirmar {
+  background: #00cc77;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  width: 100%;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.05em;
+  margin-top: 12px;
+}
+
+.btn-confirmar:hover {
+  background: #00aa66;
+}
+   
+   body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #0b0b0b;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .checkout-container {
+      background: #111;
+      width: 100%;
+      max-width: 520px;
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #6a0dad;
+      box-shadow: 0 0 20px rgba(106, 13, 173, 0.3);
+      text-align: center;
+    }
+
+    h1 { color: #6a0dad; margin-bottom: 25px; }
+
+    .resumo-pedido {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: left;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .item-resumo {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 8px;
+      font-size: 0.95em;
+    }
+
+    .item-nome { flex: 1; }
+    .item-qtd { color: #aaa; margin: 0 10px; }
+    .item-preco { color: #ffd700; font-weight: bold; }
+
+    .total-pagar {
+      font-size: 1.6em;
+      color: #00ff88;
+      font-weight: bold;
+      margin: 20px 0;
+      padding: 12px;
+      background: rgba(0,255,136,0.08);
+      border-radius: 8px;
+    }
+
+    .total-original {
+      font-size: 1.1em;
+      color: #888;
+      text-decoration: line-through;
+      margin-bottom: 8px;
+    }
+
+    .desconto-aplicado {
+      color: #00ff88;
+      font-size: 0.95em;
+      margin-top: 6px;
+    }
+
+    .valor-pagamento {
+      font-size: 1.2em;
+      color: #ffd700;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+
+    .cupom-section {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      border: 1px dashed #8a2be2;
+    }
+
+    .cupom-section input {
+      width: 60%;
+      padding: 10px;
+      border: 1px solid #6a0dad;
+      border-radius: 6px;
+      background: #000;
+      color: white;
+      margin-right: 8px;
+    }
+
+    .cupom-section button {
+      padding: 10px 18px;
+      background: #6a0dad;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .cupom-section button:hover { background: #8a2be2; }
+
+    .metodo-pagamento {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px dashed #6a0dad;
+    }
+
+    .pix-badge {
+      background: #00ff88;
+      color: black;
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .qrcode-placeholder {
+      width: 220px;
+      height: 220px;
+      background: white;
+      margin: 15px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .qrcode-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .btn-copiar {
+      background: #6a0dad;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      width: 100%;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.05em;
+      margin-top: 12px;
+    }
+
+    .btn-copiar:hover { background: #8a2be2; }
+
+    .voltar {
+      display: block;
+      margin-top: 25px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.95em;
+    }
+
+    .voltar:hover { color: #ccc; }
+  </style>
+</head>
+<body>
+
+<div class="checkout-container">
+  <h1>Finalizar Pedido</h1>
+
+  <div class="resumo-pedido" id="resumo"></div>
+
+  <div id="totalArea">
+    <div class="total-pagar" id="totalCheck">Total: R$ 0,00</div>
+    <div id="descontoInfo" style="display:none;"></div>
+  </div>
+
+  <!-- Seção de Cupom -->
+  <div class="cupom-section">
+    <h3 style="margin: 0 0 10px 0; color: #8a2be2;">Aplicar Cupom de Desconto</h3>
+    <input type="text" id="cupomInput" placeholder="Digite o código do cupom">
+    <button onclick="aplicarCupom()">Aplicar</button>
+    <p id="cupomMensagem" style="margin-top: 10px; font-size: 0.9em; color: #aaa;"></p>
+  </div>
+
+  <div class="metodo-pagamento">
+    <div class="pix-badge">PAGAMENTO VIA PIX</div>
+    <p style="font-size: 0.9em; color: #ccc; margin-bottom: 10px;">
+      Escaneie o QR Code abaixo ou use o Pix Copia e Cola
+    </p>
+    
+    <div class="qrcode-placeholder">
+      <!-- Coloque aqui o caminho da SUA IMAGEM de QR Code -->
+      <img src="qrcode-pix.png" alt="QR Code PIX">
+    </div>
+
+    <p class="valor-pagamento">
+      Valor a pagar: <strong>R$ <span id="valorFinal">0,00</span></strong>
+    </p>
+
+    <p style="font-size: 0.85em; color: #aaa; margin-top: 5px;">
+      Pague exatamente esse valor no PIX acima (com ou sem desconto aplicado).
+    </p>
+
+    <button class="btn-copiar" onclick="copiarChavePix()">Copiar Chave Pix</button>
+<button class="btn-confirmar" onclick="irParaConfirmacao()">Confirmar pagamento</button>  
+</div>
+  
+
+  <a href="#" onclick="cancelarCompra()" class="voltar">← Cancelar e voltar para a loja</a>
+</div>
+
+<script>
+// ────────────────────────────────────────────────
+// CONFIGURAÇÃO – EDITE AQUI!
+// ────────────────────────────────────────────────
+const CHAVE_PIX = "5a66d9d5-3bc4-4e51-9701-c84d5da6c554";  // Sua chave real
+
+// Cupons (já funcionais)
+const cuponsDisponiveis = {
+  "XD10":    { desconto: 10,  mensagem: "10% OFF – Bom proveito!" },
+  "PRIMEIRA": { desconto: 15,  mensagem: "15% na primeira compra!" },
+  "BLACK25":  { desconto: 25,  mensagem: "25% OFF – Aproveite!" },
+  "TESTE5":   { desconto: 5,   mensagem: "5% de desconto teste" }
+};
+
+let totalOriginal = 0;
+let descontoAtual = 0;
+let cupomAplicado = null;
+
+window.onload = function() {
+  const carrinhoStr = localStorage.getItem("carrinho");
+  const resumoDiv = document.getElementById("resumo");
+  const totalDiv = document.getElementById("totalCheck");
+
+  if (!carrinhoStr || carrinhoStr === "[]") {
+    resumoDiv.innerHTML = "<p style='text-align:center; color:#888;'>Carrinho vazio.</p>";
+    setTimeout(() => { window.location.href = "index.html"; }, 2000);
+    return;
+  }
+
+  let carrinho = JSON.parse(carrinhoStr);
+
+  let html = "";
+  totalOriginal = 0;
+
+  carrinho.forEach(item => {
+    const subtotal = item.preco * item.qtd;
+    totalOriginal += subtotal;
+
+    html += `
+      <div class="item-resumo">
+        <span class="item-nome">${item.nome}</span>
+        <span class="item-qtd">x${item.qtd}</span>
+        <span class="item-preco">R$ ${subtotal.toFixed(2)}</span>
+      </div>
+    `;
+  });
+
+  html += `<p style="font-size: 0.85em; color: #aaa; margin-top: 15px; text-align: center;">
+    Entrega: Automática via Discord
+  </p>`;
+
+  resumoDiv.innerHTML = html;
+
+  atualizarTotal();
+};
+
+function atualizarTotal() {
+  const totalFinal = totalOriginal * (1 - descontoAtual / 100);
+  document.getElementById("totalCheck").innerText = `Total: R$ ${totalFinal.toFixed(2)}`;
+  document.getElementById("valorFinal").innerText = totalFinal.toFixed(2);
+
+  const descontoInfo = document.getElementById("descontoInfo");
+  if (descontoAtual > 0) {
+    descontoInfo.style.display = "block";
+    descontoInfo.innerHTML = `
+      <div class="total-original">Original: R$ ${totalOriginal.toFixed(2)}</div>
+      <div class="desconto-aplicado">Desconto de ${descontoAtual}% aplicado!</div>
+    `;
+  } else {
+    descontoInfo.style.display = "none";
+  }
+}
+
+function aplicarCupom() {
+  const cupomDigitado = document.getElementById("cupomInput").value.trim().toUpperCase();
+  const msgEl = document.getElementById("cupomMensagem");
+
+  if (!cupomDigitado) {
+    msgEl.style.color = "#888";
+    msgEl.innerText = "Digite um código de cupom.";
+    return;
+  }
+
+  const cupom = cuponsDisponiveis[cupomDigitado];
+
+  if (cupom) {
+    descontoAtual = cupom.desconto;
+    cupomAplicado = cupomDigitado;
+
+    msgEl.style.color = "#00ff88";
+    msgEl.innerText = cupom.mensagem || `Cupom ${cupomDigitado} aplicado! ${cupom.desconto}% OFF`;
+
+    atualizarTotal();
+  } else {
+    msgEl.style.color = "#ff4444";
+    msgEl.innerText = "Cupom inválido ou expirado.";
+    descontoAtual = 0;
+    cupomAplicado = null;
+    atualizarTotal();
+  }
+}
+
+function copiarChavePix() {
+  navigator.clipboard.writeText(CHAVE_PIX).then(() => {
+    alert("Chave Pix copiada com sucesso! Agora cole no app do seu banco.");
+  }).catch(() => {
+    alert("Não foi possível copiar automaticamente. Copie manualmente a chave: " + CHAVE_PIX);
+  });
+}
+function irParaConfirmacao() {
+  // Opcional: você pode limpar o carrinho aqui se quiser que o pedido seja "finalizado"
+  // localStorage.removeItem("carrinho");  ← descomente se quiser limpar após confirmar
+
+  window.location.href = "confirmar.html";
+}
+function cancelarCompra() {
+  localStorage.removeItem("exibirPopUp");
+  localStorage.removeItem("produtoTempAdicionar");
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Meu Perfil | XD Store</title>
+
+<style>
+body {
+  background: #0b0b0b;
+  color: white;
+  font-family: Arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  background: #141414;
+  padding: 30px;
+  border-radius: 16px;
+  width: 340px;
+  text-align: center;
+  border: 2px solid #6a0dad;
+  box-shadow: 0 0 20px rgba(106,13,173,0.6);
+}
+
+img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #00ff88;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.save {
+  background: #00ff88;
+  color: black;
+}
+
+.logout {
+  background: #ff4444;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <img id="avatar" src="default-avatar.png">
+  <input type="text" id="nickname" placeholder="Nickname">
+  <input type="file" id="photo" accept="image/*">
+
+  <button class="save" onclick="salvar()">Salvar alterações</button>
+  <button class="logout" onclick="logout()">Sair da conta</button>
+</div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("loggedUserData"));
+
+if (!user) {
+  location.href = "login.html";
+}
+
+document.getElementById("nickname").value = user.nickname;
+document.getElementById("avatar").src = user.avatar || "default-avatar.png";
+
+document.getElementById("photo").onchange = function(e) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    document.getElementById("avatar").src = reader.result;
+    user.avatar = reader.result;
+  };
+  reader.readAsDataURL(e.target.files[0]);
+};
+
+function salvar() {
+  user.nickname = document.getElementById("nickname").value;
+  localStorage.setItem("loggedUserData", JSON.stringify(user));
+  alert("Perfil atualizado!");
+}
+
+function logout() {
+  localStorage.removeItem("loggedUserData");
+  location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

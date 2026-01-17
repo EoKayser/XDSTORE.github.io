@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Processando Login...</title>
+  <link rel="icon" type="image/png" href="xd.png">
+
+  <script>
+    // Recebe os dados do login
+    const params = new URLSearchParams(window.location.hash.slice(1) || window.location.search);
+    const accessToken = params.get('access_token');
+    const state = params.get('state');
+    const error = params.get('error');
+
+    if (error) {
+      alert('Erro ao fazer login: ' + error);
+      window.location.href = 'login.html';
+      return;
+    }
+
+    if (accessToken) {
+      localStorage.setItem('authToken', accessToken);
+      // Volta para a loja
+      window.location.href = 'index.html';
+    } else {
+      alert('Nenhum token recebido. Tente novamente.');
+      window.location.href = 'login.html';
+    }
+  </script>
+</head>
+<body>
+  <h1>Processando seu login...</h1>
+  <p>Aguarde um momento...</p>
+</body>
+</html>

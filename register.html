@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Criar Conta</title>
+<style>
+body {
+  background: #111;
+  color: white;
+  font-family: Arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+form {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+  width: 300px;
+}
+input, button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+button {
+  background: #6a0dad;
+  color: white;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<form onsubmit="cadastrar(event)">
+  <h2>Criar Conta</h2>
+  <input id="nome" placeholder="Nome" required>
+  <input id="email" type="email" placeholder="Email" required>
+  <input id="senha" type="password" placeholder="Senha" required>
+  <button>Cadastrar</button>
+  <p id="msg"></p>
+</form>
+
+<script src="auth.js"></script>
+<script>
+function cadastrar(e) {
+  e.preventDefault();
+
+  const nome = nome.value;
+  const email = email.value;
+  const senha = senha.value;
+
+  const result = register(nome, email, senha);
+
+  if (result === true) {
+    alert("Conta criada com sucesso!");
+    window.location.href = "login.html";
+  } else {
+    msg.innerText = result;
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Login | XD Store</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  background: #141414;
+  padding: 30px;
+  border-radius: 14px;
+  width: 320px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-main {
+  background: #00ff88;
+  color: black;
+}
+
+.social {
+  margin-top: 15px;
+}
+
+.social button {
+  margin-top: 8px;
+  background: #1f1f1f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.toggle {
+  text-align: center;
+  margin-top: 15px;
+  cursor: pointer;
+  color: #00ff88;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2 id="title">Criar Conta</h2>
+
+<input id="email" type="email" placeholder="Email">
+<input id="password" type="password" placeholder="Senha">
+
+<button class="btn-main" onclick="submitForm()">Continuar</button>
+
+<div class="social">
+  <button disabled>Entrar com Google</button>
+  <button disabled>Entrar com Discord</button>
+</div>
+
+<div class="toggle" onclick="toggleMode()">
+  Já tem conta? Entrar
+</div>
+
+</div>
+
+<script>
+let mode = "register";
+
+function toggleMode() {
+  mode = mode === "register" ? "login" : "register";
+  document.getElementById("title").innerText =
+    mode === "register" ? "Criar Conta" : "Entrar";
+  document.querySelector(".toggle").innerText =
+    mode === "register" ? "Já tem conta? Entrar" : "Não tem conta? Criar";
+}
+
+function submitForm() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    alert("Preencha todos os campos");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  if (mode === "register") {
+    if (users[email]) {
+      alert("Conta já existe");
+      return;
+    }
+
+    users[email] = { password };
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Conta criada com sucesso!");
+    toggleMode();
+
+  } else {
+    if (!users[email] || users[email].password !== password) {
+      alert("Email ou senha inválidos");
+      return;
+    }
+
+    localStorage.setItem("loggedUser", email);
+    alert("Login realizado!");
+    // window.location.href = "index.html";
+  }
+}
+</script>
+
+</body>
+</html>
