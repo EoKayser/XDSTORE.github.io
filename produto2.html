@@ -213,10 +213,14 @@
 </div>
 
 <script>
-// Controle de quantidade
+let inputQtd;
 const estoqueMaximo = 15;
-const inputQtd = document.getElementById("qtd");
 
+window.onload = function () {
+  inputQtd = document.getElementById("qtd");
+};
+
+// Controle de quantidade
 function aumentar() {
   let valor = parseInt(inputQtd.value);
   if (valor < estoqueMaximo) {
@@ -231,9 +235,10 @@ function diminuir() {
   }
 }
 
-// Adiciona ao carrinho e redireciona para index.html com pop-up
+// Adiciona ao carrinho e volta para index
 function adicionarEIrParaIndex() {
   const qtd = parseInt(inputQtd.value);
+
   const produto = {
     nome: "Minecraft SFA",
     preco: 2.50,
@@ -241,17 +246,16 @@ function adicionarEIrParaIndex() {
     qtd: qtd
   };
 
-  // Salva temporariamente para index.html processar
   localStorage.setItem("produtoTempAdicionar", JSON.stringify(produto));
   localStorage.setItem("exibirPopUp", "true");
 
-  // Redireciona para a loja principal
   window.location.href = "index.html";
 }
 
-// Comprar agora (adiciona e vai para finalizar ou index)
+// ✅ COMPRAR AGORA (CORRIGIDO E FUNCIONAL)
 function comprarAgora() {
   const qtd = parseInt(inputQtd.value);
+
   const produto = {
     nome: "Minecraft SFA",
     preco: 2.50,
@@ -259,10 +263,17 @@ function comprarAgora() {
     qtd: qtd
   };
 
-  localStorage.setItem("produtoTempAdicionar", JSON.stringify(produto));
-  localStorage.setItem("exibirPopUp", "false"); // sem pop-up
+  // Limpa carrinho anterior
+  localStorage.removeItem("carrinho");
 
-  // Pode mudar para "finalizar.html" se quiser ir direto pra finalizar
+  // Cria carrinho só com esse produto
+  localStorage.setItem("carrinho", JSON.stringify([produto]));
+
+  // Limpeza de estados antigos
+  localStorage.removeItem("produtoTempAdicionar");
+  localStorage.setItem("exibirPopUp", "false");
+
+  // Redireciona corretamente
   window.location.href = "finalizar.html";
 }
 </script>

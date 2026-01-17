@@ -211,10 +211,14 @@
 </div>
 
 <script>
-// Controle de quantidade
-const estoqueMaximo = 20; // pode aumentar se for produto digital
-const inputQtd = document.getElementById("qtd");
+let inputQtd;
+const estoqueMaximo = 15;
 
+window.onload = function () {
+  inputQtd = document.getElementById("qtd");
+};
+
+// Controle de quantidade
 function aumentar() {
   let valor = parseInt(inputQtd.value);
   if (valor < estoqueMaximo) {
@@ -229,12 +233,13 @@ function diminuir() {
   }
 }
 
-// Adiciona ao carrinho e redireciona para index.html com pop-up
+// Adiciona ao carrinho e volta para index
 function adicionarEIrParaIndex() {
   const qtd = parseInt(inputQtd.value);
+
   const produto = {
     nome: "UNBAN",
-    preco: 5,
+    preco: 5.00,
     img: "produto6.png",
     qtd: qtd
   };
@@ -245,22 +250,32 @@ function adicionarEIrParaIndex() {
   window.location.href = "index.html";
 }
 
-// Comprar agora
+// ✅ COMPRAR AGORA (CORRIGIDO E FUNCIONAL)
 function comprarAgora() {
   const qtd = parseInt(inputQtd.value);
+
   const produto = {
     nome: "UNBAN",
-    preco: 5,
+    preco: 5.00,
     img: "produto6.png",
     qtd: qtd
   };
 
-  localStorage.setItem("produtoTempAdicionar", JSON.stringify(produto));
+  // Limpa carrinho anterior
+  localStorage.removeItem("carrinho");
+
+  // Cria carrinho só com esse produto
+  localStorage.setItem("carrinho", JSON.stringify([produto]));
+
+  // Limpeza de estados antigos
+  localStorage.removeItem("produtoTempAdicionar");
   localStorage.setItem("exibirPopUp", "false");
 
-  window.location.href = "finalizar.html";  // ou direto para "finalizar.html" se preferir
+  // Redireciona corretamente
+  window.location.href = "finalizar.html";
 }
 </script>
+
 
 </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>XD Store</title>
+  
   <link rel="icon" type="image/png" href="xd.png">
 
   <!-- Font Awesome para ícones -->
@@ -424,6 +425,140 @@
   box-shadow: 0 0 15px rgba(138,43,226,0.6);
 }
 
+/* ===== INDICADOR DE CONFIANÇA ===== */
+.indicadores {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 15px 0 25px;
+}
+
+.indicador {
+  background: #111;
+  border: 1px solid #6a0dad;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 12px rgba(106, 13, 173, 0.4);
+}
+
+.indicador i {
+  color: #00ff88;
+  font-size: 1.1em;
+}
+
+/* ===== LOGO DA LOJA ===== */
+.logo {
+  font-size: 3.2em;
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin-bottom: 5px;
+}
+
+.logo span {
+  background: linear-gradient(135deg, #6a0dad, #8a2be2, #00ff88);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== ANIMAÇÃO LEVE DO INDICADOR ===== */
+@keyframes flutuar {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 0 12px rgba(106, 13, 173, 0.4);
+  }
+  50% {
+    transform: translateY(-4px);
+    box-shadow: 0 0 18px rgba(138, 43, 226, 0.6);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 12px rgba(106, 13, 173, 0.4);
+  }
+}
+
+.indicador {
+  animation: flutuar 3.5s ease-in-out infinite;
+}
+
+/* pequeno atraso diferente para cada um */
+.indicador:nth-child(1) { animation-delay: 0s; }
+.indicador:nth-child(2) { animation-delay: 0.4s; }
+.indicador:nth-child(3) { animation-delay: 0.8s; }
+
+/* ===== AVALIAÇÕES COM SLIDE ===== */
+.avaliacoes {
+  margin-top: 70px;
+  text-align: center;
+}
+
+.avaliacoes h2 {
+  color: #00ff88;
+  margin-bottom: 25px;
+}
+
+.avaliacoes-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.avaliacoes-track {
+  display: flex;
+  gap: 20px;
+  animation: deslizar 60s linear infinite;
+}
+
+.avaliacao {
+  min-width: 260px;
+  background: #111;
+  border: 2px solid #6a0dad;
+  border-radius: 14px;
+  padding: 18px;
+  transition: 0.3s;
+}
+
+.avaliacao:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(138,43,226,0.6);
+}
+
+.avaliacao-topo {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.avaliacao-topo i {
+  color: #8a2be2;
+  font-size: 22px;
+}
+
+.estrelas {
+  color: #ffd700;
+  margin-bottom: 8px;
+}
+
+.avaliacao p {
+  font-size: 0.9em;
+  color: #ccc;
+}
+
+/* animação */
+@keyframes deslizar {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
   </style>
 </head>
 
@@ -477,7 +612,25 @@
     <span>Suporte</span>
   </a>
 
-  <h1>XD STORE</h1>
+ <h1 class="logo">XD <span>STORE</span></h1>
+
+  <div class="indicadores">
+  <div class="indicador">
+    <i class="fas fa-bolt"></i>
+    <span>Entrega rápida</span>
+  </div>
+
+  <div class="indicador">
+    <i class="fas fa-lock"></i>
+    <span>Compra segura</span>
+  </div>
+
+  <div class="indicador">
+    <i class="fab fa-discord"></i>
+    <span>Suporte via Discord</span>
+  </div>
+</div>
+
 
   <nav>
     <ul>
@@ -632,6 +785,73 @@
     </div>
 
   </div>
+
+<div class="avaliacoes">
+  <h2>💬 Avaliações de Clientes</h2>
+
+  <div class="avaliacoes-wrapper">
+    <div class="avaliacoes-track">
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Lucas M.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Entrega rápida, tudo certinho. Recomendo!</p>
+      </div>
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Ana S.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Site confiável e suporte excelente.</p>
+      </div>
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Pedro R.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Preços bons e entrega muito rápida.</p>
+      </div>
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Marcos L.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Já comprei várias vezes, nunca deu problema.</p>
+      </div>
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> João V.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Loja honesta e atendimento rápido.</p>
+      </div>
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Felipe G.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Produto entregue na hora, top demais.</p>
+      </div>
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Rafael N.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Melhor loja que já comprei, recomendo 100%.</p>
+      </div>
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Bruno A.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Compra segura e rápida.</p>
+      </div>
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Daniel K.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Entrega imediata, suporte respondeu na hora.</p>
+      </div>
+
+      <div class="avaliacao">
+        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Guilherme T.</div>
+        <div class="estrelas">★★★★★</div>
+        <p>Recomendo demais, loja muito confiável.</p>
+      </div>
+
 
   <footer>
     <div>© 2026 XD Store. Todos os direitos reservados.</div>
