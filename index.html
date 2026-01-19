@@ -11,6 +11,308 @@
 
   
   <style>
+
+/* ===== FADE NAS BORDAS DAS AVALIAÇÕES ===== */
+
+.avaliacoes-wrapper {
+  position: relative;
+  overflow: hidden;
+
+  /* Fade moderno */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+
+/* ===== AVALIAÇÕES - LOOP INFINITO REAL ===== */
+
+.avaliacoes-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.avaliacoes-track {
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  animation: scrollAvaliacoes 120s linear infinite;
+}
+
+@keyframes scrollAvaliacoes {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* pausa ao passar o mouse (opcional, profissional) */
+.avaliacoes-wrapper:hover .avaliacoes-track {
+  animation-play-state: paused;
+}
+
+/* logo da plataforma */
+.avaliacao-topo .plataforma-logo {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+
+@keyframes deslizarAvaliacoes {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.avaliacao {
+  min-width: 280px;
+  background: #111;
+  border: 2px solid #6a0dad;
+  border-radius: 16px;
+  padding: 18px;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(138,43,226,0.4);
+}
+
+.avaliacao:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 25px rgba(138,43,226,0.8);
+}
+
+/* topo */
+.avaliacao-topo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+/* avatar usuário */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #6a0dad;
+}
+
+/* logo plataforma */
+.plataforma-logo {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  opacity: 0.85;
+}
+
+.estrelas {
+  color: #ffd700;
+  margin-bottom: 8px;
+}
+
+.avaliacao p {
+  font-size: 0.9em;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+
+    /* ===== ZOOM LEVE NA IMAGEM DO PRODUTO ===== */
+.produto {
+  overflow: hidden;
+}
+
+.produto img {
+  transition: transform 0.35s ease;
+}
+
+.produto:hover img {
+  transform: scale(1.08);
+}
+
+
+/* ===== DIVISOR ENTRE BOAS-VINDAS E PRODUTOS ===== */
+.divisor-secao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 50px auto 40px;
+  max-width: 1200px;
+}
+
+.divisor-secao::before,
+.divisor-secao::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #8a2be2,
+    transparent
+  );
+}
+
+.divisor-texto {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ffd700;
+  padding: 10px 22px;
+  border-radius: 30px;
+  background: #111;
+  border: 2px solid #6a0dad;
+  box-shadow: 0 0 20px rgba(138,43,226,0.6);
+  white-space: nowrap;
+}
+
+
+
+/* ===== SEÇÃO DE BOAS-VINDAS / DIVISOR ===== */
+.divisor-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 30px;
+  margin: 40px auto 60px;
+  max-width: 1200px;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(106,13,173,0.35), rgba(0,0,0,0.85));
+  border-radius: 20px;
+  border: 2px solid #6a0dad;
+  box-shadow: 0 0 30px rgba(138,43,226,0.45);
+}
+
+.divisor-esquerda {
+  flex: 1;
+  text-align: left;
+}
+
+.divisor-esquerda h2 {
+  font-size: 2.4em;
+  margin-bottom: 15px;
+  color: #00ff88;
+}
+
+.divisor-esquerda p {
+  font-size: 1.05em;
+  line-height: 1.6;
+  color: #ddd;
+  margin-bottom: 15px;
+}
+
+.divisor-esquerda .comunidade {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #5865F2;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 0 15px rgba(88,101,242,0.6);
+}
+
+.comunidade {
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.comunidade:active {
+  transform: scale(0.92);
+  filter: brightness(1.15);
+  box-shadow: 0 0 35px rgba(88,101,242,1);
+}
+
+
+
+/* lado direito */
+.divisor-direita {
+  flex: 1;
+  background: #111;
+  border-radius: 16px;
+  padding: 20px;
+  border: 2px dashed #8a2be2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.divisor-direita h3 {
+  text-align: center;
+  color: #ffd700;
+  margin-bottom: 20px;
+}
+
+.mini-produtos {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mini-produto {
+  background: #1a1a1a;
+  border: 1px solid #6a0dad;
+  border-radius: 12px;
+  width: 120px;
+  padding: 10px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.mini-produto img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.mini-produto span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85em;
+  color: #ccc;
+}
+
+.mini-produto:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(138,43,226,0.6);
+}
+
+/* responsivo */
+@media (max-width: 900px) {
+  .divisor-intro {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .divisor-esquerda {
+    text-align: center;
+  }
+}
+
     .user-avatar {
       width: 28px;
       height: 28px;
@@ -465,6 +767,17 @@
   -webkit-text-fill-color: transparent;
 }
 
+@keyframes pular {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.menu-btn.adicionar-anim {
+  animation: pular 0.3s ease;
+}
+
+
 /* ===== ANIMAÇÃO LEVE DO INDICADOR ===== */
 @keyframes flutuar {
   0% {
@@ -564,6 +877,7 @@
 
 <body>
 
+
 <div class="overlay" id="overlay"></div>
 <div class="popup-mensagem" id="popup">
   <h2>Sucesso!</h2>
@@ -576,7 +890,6 @@
   <p>Seu carrinho está vazio. Que tal dar uma olhada nos produtos?.</p>
   <button class="menu-btn" onclick="fecharPopUpCarrinhoVazio()">Entendi</button>
 </div>
-
 
 
 <div class="carrinho-sidebar" id="carrinhoSidebar">
@@ -612,7 +925,54 @@
     <span>Suporte</span>
   </a>
 
- <h1 class="logo">XD <span>STORE</span></h1>
+<div class="divisor-intro">
+
+  <!-- LADO ESQUERDO -->
+  <div class="divisor-esquerda">
+    <h2>🎮 Bem-vindos à XD Store</h2>
+
+    <p>
+      Aqui você encontra tudo para deixar sua experiência de jogo ainda melhor.
+      Compra rápida, segura e 100% digital. Explore e aproveite!
+    </p>
+
+   <div class="comunidade" onclick="abrirComunidade()">
+  <i class="fab fa-discord"></i>
+  Comunidade
+</div>
+
+<script>
+function abrirComunidade() {
+  window.open("https://discord.gg/3t7g9TbN5M", "_blank");
+}
+</script>
+
+  </div>
+
+  <!-- LADO DIREITO -->
+  <div class="divisor-direita">
+    <h3>🔥 Nossos Produtos</h3>
+
+    <div class="mini-produtos">
+      <div class="mini-produto">
+        <img src="produto1.png">
+        <span>Minecraft FA</span>
+      </div>
+
+      <div class="mini-produto">
+        <img src="produto3.png">
+        <span>Conta com Capa</span>
+      </div>
+
+      <div class="mini-produto">
+        <img src="produto4.png">
+        <span>Capa Optifine</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 
   <div class="indicadores">
   <div class="indicador">
@@ -659,6 +1019,13 @@
   </div>
   <div id="sugestoes" class="sugestoes"></div>
 </div>
+
+<div class="divisor-secao">
+  <div class="divisor-texto">
+    🛒 Explore nossos produtos
+  </div>
+</div>
+
 
 <div class="categorias">
   <button class="categoria-btn active" onclick="filtrarCategoria('todas', this)">Todas</button>
@@ -784,73 +1151,138 @@
       </button>
     </div>
 
+<div class="produto" data-nome="SKIN PROFISSIONAL" data-categoria="utilitarios">
+      <img src="produto7.png">
+      <h3>Skin Profissional</h3>
+      <div class="preco-normal">Preço: R$ 30,00</div>
+      <div class="pix-desconto">💸 Somente PIX</div>
+      <div class="pix-valor">À vista no PIX: R$ 18,00</div>
+      <a href="produto7.html" class="detalhes-btn">
+        <i class="fas fa-eye"></i> Ver detalhes
+      </a>
+      <button class="menu-btn" style="margin-top:12px; background:#00aa66; width:100%;"
+              onclick="adicionarAoCarrinho('UNBAN', 25, 'produto6.png')">
+        Adicionar ao Carrinho
+      </button>
+    </div>
+
   </div>
 
-<div class="avaliacoes">
-  <h2>💬 Avaliações de Clientes</h2>
+<div class="avaliacoes-track">
+<div class="avaliacoes-track">
 
-  <div class="avaliacoes-wrapper">
-    <div class="avaliacoes-track">
+  <!-- ===== BLOCO ORIGINAL (20 avaliações) ===== -->
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Lucas M.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Entrega rápida, tudo certinho. Recomendo!</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=marcos" class="avatar">
+      Marcos S.
+      <img src="https://cdn.simpleicons.org/google/FFFFFF" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★★★</div>
+    <p>produto ok, funcionou certinho 👍</p>
+  </div>
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Ana S.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Site confiável e suporte excelente.</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=zkauu" class="avatar">
+      zKauu_
+      <img src="https://cdn.simpleicons.org/discord/5865F2" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★☆☆</div>
+    <p>demorou um pouco mas veio certo</p>
+  </div>
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Pedro R.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Preços bons e entrega muito rápida.</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=jvzin" class="avatar">
+      jvzin_7
+      <img src="https://cdn.simpleicons.org/instagram/E4405F" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★★☆</div>
+    <p>muito bomm, compraria dnv</p>
+  </div>
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Marcos L.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Já comprei várias vezes, nunca deu problema.</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=ana" class="avatar">
+      _ana.luh_
+      <img src="https://cdn.simpleicons.org/discord/5865F2" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★★★</div>
+    <p>chegou na hr, suporte respondeu mt rápido</p>
+  </div>
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> João V.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Loja honesta e atendimento rápido.</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=felipe" class="avatar">
+      felps__
+      <img src="https://cdn.simpleicons.org/google/FFFFFF" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★★☆</div>
+    <p>bom custo benefício</p>
+  </div>
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Felipe G.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Produto entregue na hora, top demais.</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=lucas" class="avatar">
+      lucasnt
+      <img src="https://cdn.simpleicons.org/instagram/E4405F" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★★★</div>
+    <p>top dms, entrega imediata</p>
+  </div>
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Rafael N.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Melhor loja que já comprei, recomendo 100%.</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=bruno" class="avatar">
+      brn_gg
+      <img src="https://cdn.simpleicons.org/discord/5865F2" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★☆☆</div>
+    <p>funciona, mas achei meio confuso</p>
+  </div>
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Bruno A.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Compra segura e rápida.</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=renata" class="avatar">
+      renatx
+      <img src="https://cdn.simpleicons.org/google/FFFFFF" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★★☆</div>
+    <p>boa loja, recomendo</p>
+  </div>
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Daniel K.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Entrega imediata, suporte respondeu na hora.</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=diego" class="avatar">
+      dieg0_
+      <img src="https://cdn.simpleicons.org/instagram/E4405F" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★☆☆</div>
+    <p>ok, nada a reclamar</p>
+  </div>
 
-      <div class="avaliacao">
-        <div class="avaliacao-topo"><i class="fas fa-user-circle"></i> Guilherme T.</div>
-        <div class="estrelas">★★★★★</div>
-        <p>Recomendo demais, loja muito confiável.</p>
-      </div>
+  <div class="avaliacao">
+    <div class="avaliacao-topo">
+      <img src="https://api.dicebear.com/7.x/thumbs/png?seed=kauan" class="avatar">
+      kauanxx
+      <img src="https://cdn.simpleicons.org/discord/5865F2" class="plataforma-logo">
+    </div>
+    <div class="estrelas">★★★★★</div>
+    <p>já comprei várias vezes aq</p>
+  </div>
+
+  <!-- ===== DUPLICAÇÃO (NÃO REMOVER) ===== -->
+  <!-- copie exatamente o mesmo bloco novamente -->
+  <!-- (isso garante o loop infinito sem corte visual) -->
+
+  <!-- 👉 DUPLICADO -->
+  <!-- você pode literalmente duplicar tudo acima -->
+
+</div>
+
+</div>
 
 
   <footer>
@@ -1245,6 +1677,12 @@ function aplicarFiltros() {
     nenhum.style.display = algumVisivel ? "none" : "block";
   }
 }
+
+function animarBotao(botao) {
+  botao.classList.add("adicionar-anim");
+  setTimeout(() => botao.classList.remove("adicionar-anim"), 300);
+}
+
 
 </script>
 
